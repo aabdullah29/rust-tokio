@@ -1,0 +1,10 @@
+[package]
+name = "tokio-send-message-using-oneshot"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
+# failure = "0.1.7"
