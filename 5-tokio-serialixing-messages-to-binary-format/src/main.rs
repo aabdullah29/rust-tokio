@@ -34,7 +34,7 @@ async fn main() {
 
     
     let (otx, orx) = oneshot::channel();
-    println!("Heakth message send..!");
+    println!("Health message send..!");
     ctx.send(Ctrl::Health(otx)).await.expect("Error in 'ctx.send(Ctrl::Health(otx))'");
     sleep(1000).await;
     let response = orx.await;

@@ -1,4 +1,5 @@
-use tokio::sync::mpsc::{channel,Sender,Receiver};
+use tokio::sync::mpsc::{Sender,Receiver};
+
 use tokio::select;
 use tokio::sync::oneshot;
 
@@ -11,14 +12,27 @@ Ctrl channel
 Quit
 Health -> Health or not (send message again using oneshot)
 */
+/// Control request type
 #[derive(Debug)]
 pub enum Ctrl{
     Quit,
-    Health(oneshot::Sender<HealthRsponse>)
+    Health
+}
+
+/// Control response type
+#[derive(Debug)]
+pub enum CtrlR {
+    Quit(QuitResponse),
+    Health(HealthR),
 }
 
 #[derive(Debug)]
-pub enum HealthRsponse{
+pub enum QuitResponse {
+    Ok,
+}
+
+#[derive(Debug)]
+pub enum HealthR{
     Healthy,
     Unhealthy,
 }
@@ -26,7 +40,8 @@ pub enum HealthRsponse{
 /*
 send some messages
 */
-pub async fn message_generator(mut ctrl: Receiver<Ctrl>, mut channel: Sender<Message>) {
+/// The spawn function of the agent
+pub async fn message_generator(mut ctrl: Receiver<(Ctrl, oneshot::Sender<CtrlR>)>, mut channel: Sender<Message>) {
     loop {
         select! {
             msg = channel.send(Message::Hello) => match msg {
@@ -37,12 +52,14 @@ pub async fn message_generator(mut ctrl: Receiver<Ctrl>, mut channel: Sender<Mes
                 }
             },
             ctl = ctrl.recv() => match ctl{
-                Some(Ctrl::Quit) => {
+                Some((Ctrl::Quit, rtx)) => {
                     eprintln!("End by Ctrl::Quit.");
+                    rtx.send(CtrlR::Quit(QuitResponse::Ok)).expect("Error in 'ctl = ctrl.recv() => Some((Ctrl::Quit, rtx))'");
                     break
                 },
-                Some(Ctrl::Health(rtx)) => {
-                    rtx.send(HealthRsponse::Healthy).unwrap()
+                Some((Ctrl::Health, rtx)) => {
+                    rtx.send(CtrlR::Health(HealthR::Healthy)).expect("Error in 'ctl = ctrl.recv() => Some((Ctrl::Health, rtx))'")
+                    // rtx.send(CtrlR::Health(HealthR::Healthy)).unwrap();
                 },
                 None => {
                     eprintln!("Error by Ctrl::Quit.");

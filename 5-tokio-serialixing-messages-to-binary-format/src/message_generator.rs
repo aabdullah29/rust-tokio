@@ -15,11 +15,11 @@ Health -> Health or not (send message again using oneshot)
 #[derive(Debug)]
 pub enum Ctrl{
     Quit,
-    Health(oneshot::Sender<HelthRsponse>)
+    Health(oneshot::Sender<HealthRsponse>)
 }
 
 #[derive(Debug)]
-pub enum HelthRsponse{
+pub enum HealthRsponse{
     Healthy,
     Unhealthy,
 }
@@ -43,7 +43,7 @@ pub async fn message_generator(mut ctrl: Receiver<Ctrl>, mut channel: Sender<Mes
                     break
                 },
                 Some(Ctrl::Health(rtx)) => {
-                    rtx.send(HelthRsponse::Healthy).unwrap()
+                    rtx.send(HealthRsponse::Healthy).unwrap()
                 },
                 None => {
                     eprintln!("Error by Ctrl::Quit.");
