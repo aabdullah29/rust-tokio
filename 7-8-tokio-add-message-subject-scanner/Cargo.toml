@@ -1,0 +1,18 @@
+[package]
+name = "tokio-add-message-subject-scanner"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# tokio use for async operations
+tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
+# failure use for error messages
+failure = "0.1.7"
+# bincode use for 
+bincode = "1.2.1"
+# serde use for serialization, deserialization (can also use for json)
+serde = { version = "1.0.106", features = ["derive"] }
+# use for generate the random number
+rand = "0.7.3"
