@@ -14,13 +14,13 @@ and we also do some changes in `main.rs` file that can find in point no.3.
 and we did't change the `message_generator.rs` file in step 1 but we change it in step 2 so anyone can find the privious code of this file in point no.4.
 
 1. `Cargo.toml` file 
-### tokio use for async operations
+**tokio use for async operations**
 tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
-### failure use for error messages
+**failure use for error messages**
 failure = "0.1.7"
-### bincode use for binary format
+**bincode use for binary format**
 bincode = "1.2.1"
-### serde use for serialization, deserialization (can also use for json)
+**serde use for serialization, deserialization (can also use for json)**
 serde = { version = "1.0.106", features = ["derive"] }
 
 2. `message_recorder.rs`
@@ -62,7 +62,7 @@ impl MessageRecorder {
 ```
 
 
-3. `main.ts`
+3. `main.rs`
 ```
 #![allow(dead_code, unused_imports, unused_variables)]
 
@@ -104,7 +104,7 @@ async fn main() -> Fallible<()>{
 }
 ```
 
-4. `message_generator.ts`
+4. `message_generator.rs`
 ```
 use tokio::sync::mpsc::{Sender,Receiver};
 

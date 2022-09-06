@@ -3,13 +3,13 @@ Tokio is a rust framework which use for doing the async operation in rust
 now this function will send the message but if we send a new message using `Ctrl enum` then it will receive and send the changing.
 we use the `use tokio::select;` and `use tokio::sync::oneshot;` for this purpose
 
-## Changes
+## Changes in `Cargo.toml` and `main.rs`
 1. `Cargo.toml` file 
-### tokio use for async operations
+**tokio use for async operations**
 tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
 
-2. `main.ts`
-### add libraries
+2. `main.rs`
+**add libraries**
 `use tokio::prelude::*;`
 `use tokio::sync::mpsc::{channel,Sender,Receiver};`
 `use tokio::time::{Delay, delay_for};`
