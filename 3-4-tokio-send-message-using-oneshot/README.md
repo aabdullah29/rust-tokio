@@ -3,11 +3,11 @@ now this function will send the message but if we send a new message using `Ctrl
 we use the `use tokio::select;` and `use tokio::sync::oneshot;` for this purpose
 
 ## Changes in
-1. `Cargo.toml` file 
-**tokio use for async operations**
-tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
-**failure use for error messages**
-failure = "0.1.7"
+1. `Cargo.toml` file <br>
+**tokio use for async operations** <br>
+tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]} <br>
+**failure use for error messages** <br>
+failure = "0.1.7" <br>
 
 2. `file_sink.rs`
 add libraries

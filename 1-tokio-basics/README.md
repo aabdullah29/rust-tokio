@@ -4,12 +4,12 @@ now this function will send the message but if we send a new message using `Ctrl
 we use the `use tokio::select;` and `use tokio::sync::oneshot;` for this purpose
 
 ## Changes in `Cargo.toml` and `main.rs`
-1. `Cargo.toml` file 
-**tokio use for async operations**
+1. `Cargo.toml` file <br>
+**tokio use for async operations** <br>
 tokio = {version="0.2.16", features=["rt-core","time","macros","sync"]}
 
-2. `main.rs`
-**add libraries**
+2. `main.rs` <br>
+**add libraries** <br>
 `use tokio::prelude::*;`
 `use tokio::sync::mpsc::{channel,Sender,Receiver};`
 `use tokio::time::{Delay, delay_for};`
