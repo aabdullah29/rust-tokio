@@ -11,6 +11,36 @@ Future maintain their state according ti the request result:
 
 Rust now how to generate a `Future` but it can not now how to execute/resolve the `Future`, so we ca fix this using `Tokio`.
 
+### Note:
+Future is a trait in rust which have an function signature `poll` that return `enum Poll`, `poll` method run that task again and again until the `Poll` or `Future` state become Ready.
+
+
+```
+pub trait Future {
+    type Output;
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+```
+
+```
+pub enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+```
+
+#### Task, Executor and Reactor in Future
+`Task`: is the block of code that will be execut by `Future` or as `Future` <br>
+`Executor`: is a sheduler that shedules the `Task`, it's have a `ready-que` of `Tasks` <br>
+`Reactor`: it's notify the `Executor` that a `Task` is ready to execute
+
+Rust Future handle all these things in the background. <br>
+`Executor`: it's job to repetedly call the `poll` method and pass the `Context` as perameter <br>
+`Context`: it's contains the `Reactor` and it's talk to the `Future` if it's resolve then it give the result back otherwise `Reactor` add it again into the `Executor` que, `Reactor` aslo called the `awaker` <br>
+`Pin<T>`: it's a `pointer` and the part of function signature. When program run a `Future` or new `Task` than that `Task/Future` occupy some memory in `Heap` and `Pin` point out that memory address. 
+
+
 # What is Tokio?
 
 Tokio is an asynchronous runtime for the Rust programming language. It provides the building blocks needed for writing networking applications. 

@@ -6,8 +6,9 @@ async fn main() -> Result<()> {
     let mut client = client::connect("127.0.0.1:6379").await?;
 
     // Set the key "hello" with value "world"
-    client.set("hello", "world2".into()).await?;
+    client.set("hello", "world2".into()).await.unwrap_or_else(|e| println!("Error: {:?}", e));
 
+    for _ in 0..1000000000 {}
     // Get key "hello"
     let result = client.get("hello").await?;
 
