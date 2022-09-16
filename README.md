@@ -1,3 +1,5 @@
+Basics things which belongs to Rust and Tokio [Link](https://tokio.rs/tokio/glossary).
+
 
 # Futures:
 When we want to create an async/await function in rust and write `async` keyword before function then that function run the asynchronously and return a `Future`.
