@@ -1,25 +1,58 @@
-use tokio::sync::mpsc;
+async fn action(input: Option<i32>) -> Option<String> {
+    println!("=> action: {:?}", input);
+    // If the input is `None`, return `None`.
+    // This could also be written as `let i = input?;`
+    let i = match input {
+        Some(input) => input,
+        None => return None,
+    };
+    // async logic here
+    Some(format!("{}", i))
+}
 
 #[tokio::main]
 async fn main() {
-    let (tx1, mut rx1) = mpsc::channel(128);
-    let (tx2, mut rx2) = mpsc::channel(128);
-    let (tx3, mut rx3) = mpsc::channel(128);
+    let (tx, mut rx) = tokio::sync::mpsc::channel(128);
+    
+    tokio::spawn(async move {
+        for i in 0..10 {
+            let _ = tx.send(1+(i*10)).await;
+            let _ = tx.send(3+(i*10)).await;
 
-    tx1.send("one").await.unwrap();
-    tx2.send("two").await.unwrap();
-    tx3.send("three").await.unwrap();
+            if i > 5 {
+                let _ = tx.send(2+(i*10)).await;
+            }
+        }
+        println!("End spwn..!");
+    });
 
+
+    let mut done = true;
+    let operation = action(None);
+    tokio::pin!(operation);
+    
+
+    
     loop {
-        let msg = tokio::select! {
-            Some(msg) = rx1.recv() => msg,
-            Some(msg) = rx2.recv() => msg,
-            Some(msg) = rx3.recv() => msg,
-            else => { break }
-        };
+        tokio::select! {
+            res = &mut operation, if done => {
+                println!("=> operation: {:?}", res);
+                done = false;
 
-        println!("Got {:?}", msg);
+                if let Some(v) = res {
+                    println!("GOT = {}", v);
+                    return;
+                }
+            }
+            Some(v) = rx.recv() => {
+                println!("select recv: {}", v);
+
+                if v % 2 == 0 {
+                    // `.set` is a method on `Pin`.
+                    operation.set(action(Some(v)));
+                    done = true;
+                }
+            }
+        }
     }
-
-    println!("All channels have been closed.");
 }

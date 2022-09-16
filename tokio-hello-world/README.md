@@ -438,6 +438,34 @@ run `cargo run --example tokio-22-select-with-loop`
 
 
 
+### Resuming an async operation
+
+#### Example 1 
+Run an asynchronous operation across multiple calls to `select!`. In this example, we have an `MPSC` channel with item type i32, and an asynchronous function. We want to run the asynchronous function until it completes the async call.
+
+`action()` in the `select!` macro is called outside the loop. The return of action() is assigned to operation without calling `.await`. Then we call `tokio::pin!` on operation.
+
+Inside the `select!` loop, instead of passing in operation, we pass in `&mut operation`. The operation variable is tracking the in-flight asynchronous operation. Each iteration of the loop uses the same operation instead of issuing a new call to `action()`. The other `select!` branch receives a message from the channel. If the message is even, we are done looping. Otherwise, start the `select!` again.
+
+`tokio::pin!` pinning the `.await` reference, the value being referenced must be pinned or implement Unpin.
+
+run `cargo run --example tokio-23-select-resuming`
+
+
+#### Example 2
+We use a similar strategy as the previous example. The async fn is called outside of the loop and assigned to operation. The operation variable is pinned. The loop selects on both operation and the channel receiver.
+
+Notice how action takes `Option<i32>` as an argument. Before we receive the first even number, we need to instantiate operation to something. We make action take Option and return Option. If None is passed in, None is returned. The first loop iteration, operation completes immediately with None.
+
+This example uses some new syntax. The first branch includes , if !done. This is a branch precondition. Before explaining how it works, let's look at what happens if the precondition is omitted. Leaving out , if !done and running the example results in the following output:
+
+run `cargo run --example tokio-24-select-resuming-advance`
+
+
+Both `tokio::spawn` and `select!` enable running concurrent asynchronous operations. However, the strategy used to run concurrent operations differs. The `tokio::spawn` function takes an asynchronous operation and spawns a new task to run it. A task is the object that the Tokio runtime schedules. Two different tasks are scheduled independently by Tokio. They may run simultaneously on different operating system threads. Because of this, a spawned task has the same restriction as a spawned thread: no borrowing.
+
+The `select!` macro runs all branches concurrently **on the same task**. Because all branches of the `select!` macro are executed on the same task, they will never run **simultaneously**. The `select!` macro multiplexes asynchronous operations on a single task.
+
 
 
 
