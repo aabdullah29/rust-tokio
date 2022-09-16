@@ -32,7 +32,7 @@ pub enum Poll<T> {
 }
 ```
 
-#### Task, Executor and Reactor in Future
+### Task, Executor and Reactor in Future
 `Task`: is the block of code that will be execut by `Future` or as `Future` <br>
 `Executor`: is a sheduler that shedules the `Task`, it's have a `ready-que` of `Tasks` <br>
 `Reactor`: it's notify the `Executor` that a `Task` is ready to execute
@@ -89,8 +89,10 @@ Redis [docs](https://redis.io/docs/reference/protocol-spec/) and [commands](http
 #### run client on other terminal:
 `mini-redis-cli get foo`
 
-#### tokio-dics-impl
-[tokio-dics-impl](./tokio-dics-impl/) is the first tokio example in which we use `mini-redis` client and server
+#### tokio-hello-world
+tokio-hello-world is the first tokio example in which we use `mini-redis` client and server
+
+`tokio-hello-world ` is available in [tokio-dics-impl](./tokio-dics-impl/) project. path: `tokio-dics-impl/examples/tokio-2-hello-world.rs`
 
 
 
@@ -114,6 +116,8 @@ The `#[tokio::main]` function is a macro. It transforms the `async fn main()` in
 Tokio has a lot of functionality (TCP, UDP, Unix sockets, timers, sync utilities, multiple scheduler types, etc).
 
 
+# Explaination and implementation of Tokio Docs
+[tokio-dics-impl](./tokio-dics-impl/) project have a `Readme.md` file in which the basics tokio explaination is availbe and there are also many tokio code examples that can explaina the tokio functionality.
 
 
 
