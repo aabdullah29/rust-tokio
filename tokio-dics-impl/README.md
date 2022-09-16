@@ -1,18 +1,18 @@
 
-In the `tokio-hello-world` project we have two folders `src` and `examples`.
+In the `tokio-dics-impl` project we have two folders `src` and `examples`.
 - `src` folder contains the main rust file that will execute
 - `examples` folder contains the all examples
 
 we can copy the any example's code into `src/main.rs` and then execute
 
-#### install server: 
+### install server: 
 `cargo install mini-redis`
 
-#### run server:
+### run server:
 `mini-redis-server`
 
 
-## tokio-hello-world
+# tokio-hello-world
 
 Explain `tokio-hello-world` [here](https://tokio.rs/tokio/tutorial/hello-tokio)
 
@@ -29,7 +29,7 @@ or run project:
 
 
 
-## tokio-spawning
+# tokio-spawning
 
 Explain `tokio-spawning` [here](https://tokio.rs/tokio/tutorial/spawning)
 
@@ -58,13 +58,13 @@ async fn main() {
 
 Create a server code using `TcpListener::bind()` method to listen the client request and use this code as server and run the previous program `tokio-hello-world` for client. we run both program on different terminal.
 
-#### use simple spawn:
+### use simple spawn:
 `cargo run --example tokio-3-spawning`
 
-##### terminal 1: 
+#### terminal 1: 
 run `cargo run --example tokio-4-spawining-basics`
 
-##### terminal 2: 
+#### terminal 2: 
 run `cargo run --example tokio-2-hello-world`
 
 
@@ -75,10 +75,10 @@ This server just habdle the one client request at a time becouse the `.await` wi
 Implement `tokio::spawn(async {})` and also use `let mut db = HashMap::new();` in `tokio-5-spawning-store-data.rs` 
 
 
-##### terminal 1: 
+#### terminal 1: 
 run `cargo run --example tokio-5-spawning-store-data`
 
-##### terminal 2: 
+#### terminal 2: 
 run `cargo run --example tokio-2-hello-world`
 
 
@@ -87,7 +87,7 @@ run `cargo run --example tokio-2-hello-world`
 
 
 
-## tokio-shared-state
+# tokio-shared-state
 
 Explain `tokio-shared-state` [here](https://tokio.rs/tokio/tutorial/shared-state)
 
@@ -100,10 +100,10 @@ As a rule of thumb, using a synchronous mutex from within asynchronous code is f
 
 
 
-##### terminal 1: 
+#### terminal 1: 
 run `cargo run --example tokio-6-shared-state-use-mutex`
 
-##### terminal 2: 
+#### terminal 2: 
 run `cargo run --example tokio-2-hello-world`
 
 
@@ -112,7 +112,7 @@ run `cargo run --example tokio-2-hello-world`
 
 
 
-## tokio-channels
+# tokio-channels
 
 Explain `tokio-channels` [here](https://tokio.rs/tokio/tutorial/channels)
 
@@ -211,25 +211,25 @@ The final step is to receive the response back from the manager task. The GET co
 
 
 
-### run `tokio-7-channel-use-mpsc.rs`
+## run `tokio-7-channel-use-mpsc.rs`
 use `mpsc` in the following program
 
-##### terminal 1: 
+#### terminal 1: 
 run `cargo run --example tokio-6-shared-state-use-mutex`
 
-##### terminal 2: 
+#### terminal 2: 
 run `cargo run --example tokio-7-channel-use-mpsc`
 
 
 
 
-### run `tokio-8-channel-use-oneshot.rs`
+## run `tokio-8-channel-use-oneshot.rs`
 use `oneshot` in the following program
 
-##### terminal 1: 
+#### terminal 1: 
 run `cargo run --example tokio-6-shared-state-use-mutex`
 
-##### terminal 2: 
+#### terminal 2: 
 run `cargo run --example tokio-8-channel-use-oneshot`
 
 
@@ -239,7 +239,7 @@ run `cargo run --example tokio-8-channel-use-oneshot`
 
 
 
-## tokio I/O
+# tokio I/O
 
 Explain `tokio I/O` [here](https://tokio.rs/tokio/tutorial/io)
 
@@ -286,14 +286,14 @@ just like `std`, the `tokio::io` module contains a number of helpful utility fun
 
 
 
-### `tokio-9-echo-server-copy-using-io-copy.rs`
+## `tokio-9-echo-server-copy-using-io-copy.rs`
 The echo server binds a TcpListener and accepts inbound connections in a loop. For each inbound connection, data is read from the socket and written immediately back to the socket. The client sends data to the server and receives the exact same data back.
 
 run `cargo run --example tokio-9-echo-server-copy-using-io-copy`
 run `cargo run --example tokio-11-echo-client`
 
 
-### `tokio-10-echo-server-copy-manually.rs`
+## `tokio-10-echo-server-copy-manually.rs`
 To do this, we use `AsyncReadExt::read` and `AsyncWriteExt::write_all`.
 
 run `cargo run --example tokio-10-echo-server-copy-manually`
@@ -304,7 +304,7 @@ run `cargo run --example tokio-11-echo-client`
 
 
 
-## tokio Framing
+# tokio Framing
 
 Explain `tokio Framing` [here](https://tokio.rs/tokio/tutorial/framing)
 
@@ -320,16 +320,13 @@ Framing is the process of taking a byte stream and converting it to a stream of 
 
 
 
-## tokio async in depth
+# tokio async in depth
 
 Explain `tokio async in depth` [here](https://tokio.rs/tokio/tutorial/async)
 
  Asynchronous Rust takes a unique approach and asynchronous Rust functions return futures. Futures must have poll called on them to advance their state. Rust futures are state machines that manage the state of any function/task like `Poll::Ready` and `Poll::Pending` etc.
 
-### Futures
-
-
-
+## Futures
 
 implement the future from `std::future::futureFuture`
 
@@ -343,7 +340,7 @@ run `cargo run --example tokio-13-async-resolve-future-manually`
 
 
 
-### Executors
+## Executors
 
 Asynchronous Rust functions return futures. Futures must have poll called on them to advance their state. Futures are composed of other futures. So, the question is, what calls poll on the very most outer future?
 
@@ -357,12 +354,12 @@ run `cargo run --example tokio-14-async-executor`
 
 
 
-### Waker
+## Waker
 
 run `cargo run --example tokio-15-async-waker`
 
 
-#### Update the MiniTokio:
+### Update the MiniTokio:
 
 Wakers are Sync and can be cloned. When wake is called, the task must be scheduled for execution. To implement this, we have a channel. When the wake() is called on the waker, the task is pushed into the send half of the channel. Our Task structure will implement the wake logic. To do this, it needs to contain both the spawned future and the channel send half.
 
@@ -382,7 +379,7 @@ run `cargo run --example tokio-17-mini-tokio-instance`
 
 
 
-## tokio Select
+# tokio Select
 
 when multiple `Futures` call then the code run in sequence.  
 So, when we wanted to add concurrency, we spawned a new task. It's a additional ways to concurrently execute asynchronous code with Tokio.
@@ -400,7 +397,7 @@ run `cargo run --example tokio-18-select-example`
 run `cargo run --example tokio-19-select-return-example`
 
 
-### select-use-else
+## select-use-else
 In the below example, the select! expression waits on receiving a value from rx1 and rx2. If a channel closes, recv() returns None. This does not match the pattern and the branch is disabled. The select! expression will continue waiting on the remaining branches.
 
 Notice that this select! expression includes an else branch. The select! expression must evaluate to a value. When using pattern matching, it is possible that none of the branches match their associated patterns. If this happens, the else branch is evaluated.
@@ -410,7 +407,7 @@ run `cargo run --example tokio-20-select-use-else`
 
 
 
-### select-borrowing
+## select-borrowing
 When spawning tasks, the spawned `async` expression must own all of its data. The `select!` macro does not have this limitation. Each branch's `async` expression may `borrow` data and operate `concurrently`. Following Rust's `borrow` rules, multiple async expressions may immutably borrow a single piece of data or a single async expression may mutably borrow a piece of data.
 
 In the below example the data variable is being borrowed `immutably` from both async expressions. When one of the operations completes successfully, the other one is dropped. Because we pattern match on `Some(v)`, if an expression fails, the other one continues to execute.
@@ -421,7 +418,7 @@ run `cargo run --example tokio-21-select-borrowing`
 
 
 
-### select-with-loop
+## select-with-loop
 The select! macro randomly picks branches. The select! macro is often used in loops. This section will go over some examples to show common ways of using the select! macro in a loop. We start by selecting over multiple channels.
 
 This example selects over the three channel receivers. When a message is received on any channel, it is written to STDOUT. When a channel is closed, recv() returns with None. By using pattern matching, the select! macro continues waiting on the remaining channels. When all channels are closed, the else branch is evaluated and the loop is terminated.
@@ -438,9 +435,9 @@ run `cargo run --example tokio-22-select-with-loop`
 
 
 
-### Resuming an async operation
+## Resuming an async operation
 
-#### Example 1 
+### Example 1 
 Run an asynchronous operation across multiple calls to `select!`. In this example, we have an `MPSC` channel with item type i32, and an asynchronous function. We want to run the asynchronous function until it completes the async call.
 
 `action()` in the `select!` macro is called outside the loop. The return of action() is assigned to operation without calling `.await`. Then we call `tokio::pin!` on operation.
@@ -452,7 +449,7 @@ Inside the `select!` loop, instead of passing in operation, we pass in `&mut ope
 run `cargo run --example tokio-23-select-resuming`
 
 
-#### Example 2
+### Example 2
 We use a similar strategy as the previous example. The async fn is called outside of the loop and assigned to operation. The operation variable is pinned. The loop selects on both operation and the channel receiver.
 
 Notice how action takes `Option<i32>` as an argument. Before we receive the first even number, we need to instantiate operation to something. We make action take Option and return Option. If None is passed in, None is returned. The first loop iteration, operation completes immediately with None.
@@ -476,7 +473,7 @@ The `select!` macro runs all branches concurrently **on the same task**. Because
 
 
 
-## tokio streams
+# tokio streams
 
 Explain `tokio streams` [here](https://tokio.rs/tokio/tutorial/streams)
 
@@ -488,7 +485,7 @@ Tokio provides stream support in a separate crate: `tokio-stream`.
 `tokio-stream = "0.1"`
 
 
-### Iteration
+## Iteration
 Rust programming language does not support async for loops. Instead, iterating streams is done using a while let loop paired with `StreamExt::next()`.
 
 ```
@@ -510,7 +507,7 @@ Like iterators, the `next()` method returns `Option<T>` where T is the stream's 
 
 
 
-### Example with Mini-Redis broadcast
+## Example with Mini-Redis broadcast
 
 A task is spawned to publish messages to the `Mini-Redis` server on the "numbers" channel. Then, on the main task, we subscribe to the "numbers" channel and display received messages.
 
@@ -525,14 +522,14 @@ run `cargo run --example tokio-25-stream-mini-radis-example-1`
 
 
 
-#### `Pin`
+### `Pin`
 A Rust value is "pinned" when it can no longer be moved in memory. A key property of a pinned value is that pointers can be taken to the pinned data and the caller can be confident the pointer stays valid. This feature is used by `async/await` to support borrowing data across `.await` points.
 
 
 
 
 
-### Adapters
+## Adapters
 Functions that take a `Stream` and return another `Stream` are often called 'stream adapters', as they're a form of the 'adapter pattern'. Common `stream adapters` include `map`, `take`, and `filter`.
 
 Another option would be to combine the filter and map steps into a single call using filter_map.
@@ -548,7 +545,7 @@ run `cargo run --example tokio-26-stream-mini-radis-example-2`
 
 
 
-### Implementing `Stream`
+## Implementing `Stream`
 The `Stream` trait is very similar to the `Future` trait.
 
 The `Stream::poll_next()` function is much like `Future::poll`, except it can be called repeatedly to receive many values from the stream. Just as we saw in "Async in depth", when a stream is not ready to return a value, `Poll::Pending` is returned instead. The task's `waker` is registered. Once the stream should be polled again, the waker is notified.
@@ -576,13 +573,13 @@ pub trait Stream {
 
 
 
-## Bridging with sync code: [Link](https://tokio.rs/tokio/topics/bridging)
+# Bridging with sync code: [Link](https://tokio.rs/tokio/topics/bridging)
 
 Thsi topic is about how to use tokio for a specific task with use the `#[tokio::main]` macro with man =e function.
 
 
 
-## Graceful Shutdown: [Link](https://tokio.rs/tokio/topics/shutdown)
+# Graceful Shutdown: [Link](https://tokio.rs/tokio/topics/shutdown)
 
 The purpose of this chapter is to give an overview of how to properly implement shutdown in asynchronous applications.
 
@@ -595,7 +592,7 @@ There are usually three parts to implementing graceful shutdown:
 
 
 
-## Getting started with Tracing: [Link](https://tokio.rs/tokio/topics/tracing)
+# Getting started with Tracing: [Link](https://tokio.rs/tokio/topics/tracing)
 
 This checper is about tracing the othar async tasks because, we can't get runtime info and state information about the other async tasks. `tracing` crate is a framework for instrumenting Rust programs to collect structured, event-based diagnostic information.
 
@@ -610,7 +607,7 @@ can use tracing to:
 
 
 
-## Next steps with Tracing: [Link](https://tokio.rs/tokio/topics/tracing-next-steps)
+# Next steps with Tracing: [Link](https://tokio.rs/tokio/topics/tracing-next-steps)
 
 This is about `tokio-console`.
 
@@ -619,7 +616,7 @@ Tokio-console is an htop-like utility that enables you to see a real-time view o
 
 
 
-## Glossary (Some Basics Things): [Link](https://tokio.rs/tokio/glossary)
+# Glossary (Some Basics Things): [Link](https://tokio.rs/tokio/glossary)
 
 In this Chepter Tokio explain the basics async things:
 

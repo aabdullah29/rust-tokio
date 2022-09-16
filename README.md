@@ -42,6 +42,8 @@ Rust Future handle all these things in the background. <br>
 `Context`: it's contains the `Reactor` and it's talk to the `Future` if it's resolve then it give the result back otherwise `Reactor` add it again into the `Executor` que, `Reactor` aslo called the `awaker` <br>
 `Pin<T>`: it's a `pointer` and the part of function signature. When program run a `Future` or new `Task` than that `Task/Future` occupy some memory in `Heap` and `Pin` point out that memory address. 
 
+In simple worlds we can say that `.await` work as a loop and it's call the `poll` methods until the furure is resolved/Ready
+and we can resolve the `Future` with out using `.await` but then we should use a `loop` and `yield` the task until get the Ready state of that task.
 
 # What is Tokio?
 
@@ -87,8 +89,8 @@ Redis [docs](https://redis.io/docs/reference/protocol-spec/) and [commands](http
 #### run client on other terminal:
 `mini-redis-cli get foo`
 
-#### tokio-hello-world
-[tokio-hello-world](./tokio-hello-world/) is the first tokio example in which we use `mini-redis` client and server
+#### tokio-dics-impl
+[tokio-dics-impl](./tokio-dics-impl/) is the first tokio example in which we use `mini-redis` client and server
 
 
 
