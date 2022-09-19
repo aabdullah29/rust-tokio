@@ -1,5 +1,5 @@
 
-In the `tokio-dics-impl` project we have two folders `src` and `examples`.
+In the `tokio-docs-impl` project we have two folders `src` and `examples`.
 - `src` folder contains the main rust file that will execute
 - `examples` folder contains the all examples
 

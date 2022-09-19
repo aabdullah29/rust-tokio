@@ -92,7 +92,7 @@ Redis [docs](https://redis.io/docs/reference/protocol-spec/) and [commands](http
 #### tokio-hello-world
 tokio-hello-world is the first tokio example in which we use `mini-redis` client and server
 
-`tokio-hello-world ` is available in [tokio-dics-impl](./tokio-dics-impl/) project. path: `tokio-dics-impl/examples/tokio-2-hello-world.rs`
+`tokio-hello-world ` is available in [tokio-docs-impl](./tokio-docs-impl/) project. path: `tokio-docs-impl/examples/tokio-2-hello-world.rs`
 
 
 
@@ -117,7 +117,7 @@ Tokio has a lot of functionality (TCP, UDP, Unix sockets, timers, sync utilities
 
 
 # Explaination and implementation of Tokio Docs
-[tokio-dics-impl](./tokio-dics-impl/) project have a `Readme.md` file in which the basics tokio explaination is availbe and there are also many tokio code examples that can explaina the tokio functionality.
+[tokio-docs-impl](./tokio-docs-impl/) project have a `Readme.md` file in which the basics tokio explaination is availbe and there are also many tokio code examples that can explaina the tokio functionality.
 
 
 
